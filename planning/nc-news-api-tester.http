@@ -1,0 +1,2 @@
+### GET a single article
+GET https://olly-nc-news.onrender.com/api/articles/1

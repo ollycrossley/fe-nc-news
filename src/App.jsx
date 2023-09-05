@@ -12,17 +12,17 @@ import SingleArticlePage from "./components/Articles/SingleArticlePage.jsx";
 
 function App() {
 
-  return (
-    <>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/users" element={<Users />} />
-            <Route path="/articles/:article_id" element={<SingleArticlePage />}/>
-        </Routes>
-    </>
-  )
+    return (
+        <>
+            <NavBar/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/articles" element={<Articles/>}/>
+                <Route path="/articles/:article_id" element={<SingleArticlePage/>}/>
+                <Route path="/users" element={<Users/>}/>
+            </Routes>
+        </>
+    )
 }
 
 export default App
