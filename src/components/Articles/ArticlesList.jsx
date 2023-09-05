@@ -13,7 +13,6 @@ export default function ArticlesList() {
         getArticles().then(articles => {
             setArticles(articles)
             setIsLoading(false)
-            console.log(articles)
         })
     }, []);
 
