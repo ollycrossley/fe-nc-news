@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
 import './mystyle.css'
 import './App.css'
@@ -8,9 +8,9 @@ import Articles from "./components/Articles/Articles.jsx";
 import Users from "./components/Users/Users.jsx";
 import Home from "./components/Home.jsx";
 import {Route, Routes} from "react-router-dom";
+import SingleArticlePage from "./components/Articles/SingleArticlePage.jsx";
 
 function App() {
-  const [test, setTest] = useState(0)
 
   return (
     <>
@@ -19,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/users" element={<Users />} />
+            <Route path="/articles/:article_id" element={<SingleArticlePage />}/>
         </Routes>
     </>
   )
