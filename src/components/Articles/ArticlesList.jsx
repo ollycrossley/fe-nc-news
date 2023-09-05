@@ -21,6 +21,6 @@ export default function ArticlesList() {
     </Container>
 
     return <div className={"columns is-centered is-multiline"} style={{justifyContent: "stretch"}}>
-        {articles.map(article => <ArticlesListArticle article={article}/> )}
+        {articles.map(article => <ArticlesListArticle article={article} key={article.article_id}/> )}
     </div>
 }

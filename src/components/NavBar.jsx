@@ -24,9 +24,9 @@ export default function NavBar() {
         </div>
         <div id={"main-nav-bar"} className={`navbar-menu is-size-5 ${isActive ? "is-active" : ""}`}>
             <div className={"navbar-start mb-6"}>
-                <Link to={"/"}><a className={"navbar-item"}>Home</a></Link>
-                <Link to={"/articles"}><a className={"navbar-item"}>Articles</a></Link>
-                <Link to={"/users"}><a className={"navbar-item"}>Users</a></Link>
+                <Link to={"/"} className={"navbar-item"}><p>Home</p></Link>
+                <Link to={"/articles"} className={"navbar-item"}><p>Articles</p></Link>
+                <Link to={"/users"} className={"navbar-item"}><p>Users</p></Link>
             </div>
             <div className="navbar-end mb-6">
                 <div className="navbar-item has-dropdown is-hoverable is-right">
