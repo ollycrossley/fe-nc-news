@@ -13,7 +13,7 @@ export default function SingleArticlePage() {
         })
     }, []);
 
-    return <div className={"container is-mobile"}>
+    return <div className={"container is-mobile"} id={"single-article-container"}>
 
         <h1 className={"title"}>{article.title}</h1>
 
