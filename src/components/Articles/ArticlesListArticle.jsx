@@ -10,8 +10,8 @@ export default function ArticlesListArticle({article}) {
                 <div className={"columns is-mobile"}>
                     <div className={"column is-two-thirds is-align-content-start"}>
                     <span className={"icon-text"}>
-                        <span className={"icon"}><i className={"fas fa-user"}/></span>
-                        <span><p>{article.author}</p></span>
+                        <span className={"icon"} aria-label={"user icon"}><i className={"fas fa-user"}/></span>
+                        <span aria-label={"username"}><p>{article.author}</p></span>
                     </span>
                     </div>
                     <div className={"column is-one-third has-text-right"}>
