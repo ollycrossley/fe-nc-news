@@ -7,7 +7,7 @@ export default function NavBar() {
         <div className={"container is-mobile"}>
         <div className={"navbar-brand"}>
             <figure className={"image mr-6 mb-auto is-128x128"}>
-                <img id={"nav-logo"} src={"src/assets/nc-news-logo.png"} alt={"NC marketplace logo"}/>
+                <img id={"nav-logo"} src={"https://i.ibb.co/2YrB60k/nc-news-logo.png"} alt={"NC marketplace logo"}/>
             </figure>
             <a role="button"
                className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
