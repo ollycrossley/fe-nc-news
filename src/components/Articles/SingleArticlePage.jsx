@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getArticle} from "../../../api.js";
 import moment from "moment";
+import Comments from "./Comments/Comments.jsx";
 
 export default function SingleArticlePage() {
     const {article_id} = useParams()
@@ -20,7 +21,7 @@ export default function SingleArticlePage() {
         <section className={"block"}>
             <span className={"icon-text"}>
                 <span className={"icon"} aria-label={"Time"}><i className={"fas fa-clock"}/></span>
-                <span><p>{moment(article.created_at).utc().format("DD-MM-YYYY")}</p></span>
+                <span><p>{moment(article.created_at).fromNow()}</p></span>
             </span>
             <span className={"icon-text pl-4"}>
                 <span className={"icon"} aria-label={"Topic"}><i className={"fas fa-tag"}/></span>
@@ -43,6 +44,8 @@ export default function SingleArticlePage() {
         </section>
 
         <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
+
+        <Comments article={article}/>
 
     </div>
 }
