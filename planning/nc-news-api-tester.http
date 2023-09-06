@@ -1,2 +1,9 @@
 ### GET a single article
 GET https://olly-nc-news.onrender.com/api/articles/1
+
+### GET comments by ID
+GET https://olly-nc-news.onrender.com/api/articles/1/comments
+
+### GET user by username
+GET https://olly-nc-news.onrender.com/api/users/tickle122
+
