@@ -26,38 +26,46 @@ export default function SingleArticlePage() {
         <br/><br/>
     </section>
 
+
     return <div className={"container is-mobile"} id={"single-article-container"}>
 
-        <h1 className={"title"}>{article.title}</h1>
+        <div className={"columns is-mobile"}>
 
-        <section className={"block"}>
-            <span className={"icon-text"}>
-                <span className={"icon"} aria-label={"Time"}><i className={"fas fa-clock"}/></span>
-                <span><p>{moment(article.created_at).fromNow()}</p></span>
-            </span>
-            <span className={"icon-text pl-4"}>
-                <span className={"icon"} aria-label={"Topic"}><i className={"fas fa-tag"}/></span>
-                <span><p>{article.topic}</p></span>
-            </span>
-        </section>
-
-
-        <section>
-            <figure className={"block"}>
-                <img className={"image"} src={article.article_img_url} alt={"article image"}/>
-            </figure>
-            <div className={"block"} style={{display: "inline-block"}}>
-                    <span className={"icon-text is-size-5"} id={"article-username-block"}>
-                    <span className={"icon pr-3"} aria-label={"user"}><i className={"fas fa-user"}/></span>
-                    <span><p>{article.author}</p></span>
-                </span>
-                <hr/>
+            <div className={"column is-gapless has-text-right is-narrow"}>
+                <span className={"icon is-size-4 mb-2 has-text-danger"} aria-label={"upvote"}><i className="fa-solid fa-circle-chevron-up"></i></span><br/>
+                <p className={"is-text has-text-centered mb-2"}><strong>{article.votes}</strong></p>
+                <span className={"icon is-size-4 has-text-danger"} aria-label={"upvote"}><i className="fa-solid fa-circle-chevron-down"></i></span>
             </div>
-        </section>
 
-        <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
+            <div className={"column"}>
+                <h1 className={"title"}>{article.title}</h1>
 
-        <Comments article={article} comments={comments}/>
+                <section className={"block"}>
+                    <span className={"icon-text"}>
+                        <span className={"icon"} aria-label={"Time"}><i className={"fas fa-clock"}/></span>
+                        <span><p>{moment(article.created_at).fromNow()}</p></span>
+                    </span>
+                        <span className={"icon-text pl-4"}>
+                    <span className={"icon"} aria-label={"Topic"}><i className={"fas fa-tag"}/></span>
+                        <span><p>{article.topic}</p></span>
+                    </span>
+                </section>
 
+                <section>
+                    <figure className={"block"}>
+                        <img className={"image"} src={article.article_img_url} alt={"article image"}/>
+                    </figure>
+                    <div className={"block"} style={{display: "inline-block"}}>
+                        <span className={"icon-text is-size-5"} id={"article-username-block"}>
+                            <span className={"icon pr-3"} aria-label={"user"}><i className={"fas fa-user"}/></span>
+                            <span><p>{article.author}</p></span>
+                        </span>
+                        <hr/>
+                    </div>
+                </section>
+
+                <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
+                <Comments article={article} comments={comments}/></div>
+        </div>
     </div>
 }
