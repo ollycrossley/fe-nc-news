@@ -1,18 +1,30 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getArticle} from "../../../api.js";
+import {getArticle, getComments} from "../../../api.js";
 import moment from "moment";
 import Comments from "./Comments/Comments.jsx";
 
 export default function SingleArticlePage() {
     const {article_id} = useParams()
     const [article, setArticle] = useState({})
+    const [comments, setComments] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         getArticle(article_id).then(article => {
             setArticle(article)
         })
+        getComments(article_id).then(comments => {
+            setComments(comments)
+            setIsLoading(false)
+        })
     }, []);
+
+    if (isLoading) return <section className={"container"}>
+        <img className={"image is-64x64 m-auto"} src={"https://i.ibb.co/6bCLSjz/loading.gif"} alt={"loading symbol"}/>
+        <br/><br/>
+    </section>
 
     return <div className={"container is-mobile"} id={"single-article-container"}>
 
@@ -45,7 +57,7 @@ export default function SingleArticlePage() {
 
         <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
 
-        <Comments article={article}/>
+        <Comments article={article} comments={comments}/>
 
     </div>
 }
