@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getArticle, getComments} from "../../../api.js";
+import {getArticle, getComments, patchVote} from "../../../api.js";
 import moment from "moment";
 import Comments from "./Comments/Comments.jsx";
 
@@ -9,17 +9,26 @@ export default function SingleArticlePage() {
     const [article, setArticle] = useState({})
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [votes, setVotes] = useState(article.votes)
 
     useEffect(() => {
         setIsLoading(true)
         getArticle(article_id).then(article => {
             setArticle(article)
+            setVotes(article.votes)
+
         })
         getComments(article_id).then(comments => {
             setComments(comments)
             setIsLoading(false)
         })
     }, []);
+
+    const handleVotes = (vote) => {
+        patchVote(article_id, vote).then(article => {
+            setVotes(currVotes => currVotes + vote)
+        })
+    }
 
     if (isLoading) return <section className={"container"}>
         <img className={"image is-64x64 m-auto"} src={"https://i.ibb.co/6bCLSjz/loading.gif"} alt={"loading symbol"}/>
@@ -32,9 +41,18 @@ export default function SingleArticlePage() {
         <div className={"columns is-mobile"}>
 
             <div className={"column is-gapless has-text-right is-narrow"}>
-                <span className={"icon is-size-4 mb-2 has-text-danger"} aria-label={"upvote"}><i className="fa-solid fa-circle-chevron-up"></i></span><br/>
-                <p className={"is-text has-text-centered mb-2"}><strong>{article.votes}</strong></p>
-                <span className={"icon is-size-4 has-text-danger"} aria-label={"upvote"}><i className="fa-solid fa-circle-chevron-down"></i></span>
+                <a onClick={() => handleVotes(1)}>
+                    <span className={"icon is-size-4 mb-2 has-text-danger"} aria-label={"upvote"}>
+                    <i className="fa-solid fa-circle-chevron-up"></i>
+                    </span>
+                </a>
+                <br/>
+                <p className={"is-text has-text-centered mb-2"}><strong>{votes}</strong></p>
+                <a onClick={() => handleVotes(-1)}>
+                    <span className={"icon is-size-4 has-text-danger"} aria-label={"upvote"}>
+                        <i className="fa-solid fa-circle-chevron-down"></i>
+                    </span>
+                </a>
             </div>
 
             <div className={"column"}>
@@ -65,6 +83,7 @@ export default function SingleArticlePage() {
                 </section>
 
                 <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
+
                 <Comments article={article} comments={comments}/></div>
         </div>
     </div>
