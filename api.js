@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// const baseURL = "https://olly-nc-news.onrender.com"
-const baseURL = "http://localhost:9090"
+const baseURL = "https://olly-nc-news.onrender.com"
+// const baseURL = "http://localhost:9090"
 
 export const getArticles = () => {
     return axios.get(`${baseURL}/api/articles`).then(response => response.data.articles)
