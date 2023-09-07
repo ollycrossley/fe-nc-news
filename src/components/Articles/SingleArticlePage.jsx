@@ -10,6 +10,7 @@ export default function SingleArticlePage() {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [votes, setVotes] = useState(article.votes)
+    // const [err, setErr] = useState(null)
 
     useEffect(() => {
         setIsLoading(true)
@@ -25,8 +26,10 @@ export default function SingleArticlePage() {
     }, []);
 
     const handleVotes = (vote) => {
-        patchVote(article_id, vote).then(article => {
-            setVotes(currVotes => currVotes + vote)
+        setVotes(currVotes => currVotes + vote)
+        patchVote(article_id, vote).catch((err) => {
+            setVotes(currVotes => currVotes - vote)
+            alert("Something went wrong! Try again!")
         })
     }
 
@@ -84,7 +87,7 @@ export default function SingleArticlePage() {
 
                 <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
 
-                <Comments article={article} comments={comments}/></div>
+                <Comments article={article} comments={comments} setComments={setComments}/></div>
         </div>
     </div>
 }
