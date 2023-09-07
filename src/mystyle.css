@@ -7879,3 +7879,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 @media screen and (max-width: 1023px) {
   .container {
     padding: 3%; } }
+
+#article-image {
+  object-fit: cover; }
