@@ -15,3 +15,7 @@ export const getComments = (article_id) => {
 export const getUser = (username) => {
     return axios.get(`https://olly-nc-news.onrender.com/api/users/${username}`).then(response => response.data.user)
 }
+
+export const patchVote = (article_id, vote) => {
+    return axios.patch(`https://olly-nc-news.onrender.com/api/articles/${article_id}`, {inc_votes: vote}).then(response => response.data.article)
+}
