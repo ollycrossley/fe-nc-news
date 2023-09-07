@@ -1,8 +1,13 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
+import {UserContext} from "../contexts/loggedUser.jsx";
 
 export default function NavBar() {
+
     const [isActive, setIsActive] = useState(false);
+    const {user, setUser} = useContext(UserContext)
+
+
     return <nav className={"navbar is-spaced"} role={"navigation"} aria-label={"main navigation"}>
         <div className={"container is-mobile"}>
         <div className={"navbar-brand"}>
@@ -30,7 +35,7 @@ export default function NavBar() {
             </div>
             <div className="navbar-end mb-6">
                 <div className="navbar-item has-dropdown is-hoverable is-right">
-                    <a className={"navbar-link mr-3 mb-auto"}>Username</a>
+                    <a className={"navbar-link mr-3 mb-auto"}>{user.username}</a>
                     <div className="navbar-dropdown is-danger">
                         <a className="navbar-item">
                             Switch User
