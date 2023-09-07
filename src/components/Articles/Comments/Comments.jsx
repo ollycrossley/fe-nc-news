@@ -39,7 +39,7 @@ export default function Comments({article, comments, setComments}) {
                     <div className={"media-content"}>
                         <div className={"field"}>
                             <p className={"control"} style={{width: "70%"}}>
-                        <textarea className="textarea" placeholder="Add a comment..."
+                        <textarea required={true} className="textarea" placeholder="Add a comment..."
                                   onChange={e => setCommentInput(e.target.value)} value={commentInput}></textarea>
                             </p>
                         </div>

@@ -4,7 +4,7 @@ export default function ArticlesListArticle({article}) {
     return <section className={"column is-one-third"} aria-label={"Article"}>
         <Link to={`/articles/${article.article_id}`}>
             <div className={"box"}>
-                <img className={"image pb-3"} src={article.article_img_url} alt={"article photo"}/>
+                <figure className={"image is-4by3"} ><img id={"article-image"} className={"pb-3"} src={article.article_img_url} alt={"article photo"}/></figure>
                 <p className={"title is-size-3"} aria-label={"article title"}>{article.title}</p>
                 <p className={"subtitle"} aria-label={"article topic"}>{article.topic[0].toUpperCase() + article.topic.slice(1)}</p>
                 <div className={"columns is-mobile"}>
