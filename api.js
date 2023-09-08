@@ -11,15 +11,15 @@ export const getArticles = (topic, order, sort) => {
         topic ? getArticlesBase += `topic=${topic}&` : ""
         sort ? getArticlesBase += `sort_by=${sort}&` : ""
     }
-    return axios.get(`${getArticlesBase}`).then(response => response.data.articles)
+    return axios.get(`${getArticlesBase}`).then(response => response.data.articles).catch(() => console.log("Failed to get page!"))
 }
 
 export const getArticle = (article_id) => {
-    return axios.get(`${baseURL}/api/articles/${article_id}`).then(response => response.data.article)
+    return axios.get(`${baseURL}/api/articles/${article_id}`).then(response => response.data.article).catch(() => console.log("Failed to get article!"))
 }
 
 export const getComments = (article_id) => {
-    return axios.get(`${baseURL}/api/articles/${article_id}/comments`).then(response => response.data.comments)
+    return axios.get(`${baseURL}/api/articles/${article_id}/comments`).then(response => response.data.comments).catch(() => console.log("Failed to get comments"))
 }
 
 export const getUser = (username) => {

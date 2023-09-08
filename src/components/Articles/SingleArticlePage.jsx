@@ -3,12 +3,14 @@ import {useEffect, useState} from "react";
 import {getArticle, patchVote} from "../../../api.js";
 import moment from "moment";
 import Comments from "./Comments/Comments.jsx";
+import Header from "../Header.jsx";
 
 export default function SingleArticlePage() {
     const {article_id} = useParams()
     const [article, setArticle] = useState({})
 
     const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
     const [votes, setVotes] = useState(article.votes)
 
     useEffect(() => {
@@ -17,6 +19,9 @@ export default function SingleArticlePage() {
             setArticle(article)
             setVotes(article.votes)
             setIsLoading(false)
+        }) .catch(() => {
+            setIsLoading(false)
+            setIsError(true)
         })
     }, []);
 
@@ -31,6 +36,10 @@ export default function SingleArticlePage() {
     if (isLoading) return <section className={"container"}>
         <img className={"image is-64x64 m-auto"} src={"https://i.ibb.co/6bCLSjz/loading.gif"} alt={"loading symbol"}/>
         <br/><br/>
+    </section>
+
+    if (isError) return <section className={"container"}>
+        <p className={"title"}>Oops! Not Found!</p>
     </section>
 
 
