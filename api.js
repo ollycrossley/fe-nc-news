@@ -3,12 +3,15 @@ import axios from "axios"
 const baseURL = "https://olly-nc-news.onrender.com"
 // const baseURL = "http://localhost:9090"
 
-export const getArticles = (topic) => {
-    if (topic) {
-        return axios.get(`${baseURL}/api/articles?topic=${topic}`).then(response => response.data.articles)
-    } else {
-        return axios.get(`${baseURL}/api/articles`).then(response => response.data.articles)
+export const getArticles = (topic, order) => {
+    let getArticlesBase = `${baseURL}/api/articles`
+    if (topic || order) {
+        getArticlesBase += "?"
+        topic ? getArticlesBase += `topic=${topic}&` : ""
+        order ? getArticlesBase += `order=${order}&` : ""
     }
+    console.log(getArticlesBase)
+    return axios.get(`${getArticlesBase}`).then(response => response.data.articles)
 }
 
 export const getArticle = (article_id) => {
