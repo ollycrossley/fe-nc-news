@@ -33,7 +33,6 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
     }
 
     function handleSort(sort) {
-        console.log(acceptedSorts[sort])
         setSortBy(acceptedSorts[sort])
     }
 

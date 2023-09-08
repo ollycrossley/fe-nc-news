@@ -11,8 +11,6 @@ export const getArticles = (topic, order, sort) => {
         topic ? getArticlesBase += `topic=${topic}&` : ""
         sort ? getArticlesBase += `sort_by=${sort}&` : ""
     }
-
-    console.log(getArticlesBase)
     return axios.get(`${getArticlesBase}`).then(response => response.data.articles)
 }
 
