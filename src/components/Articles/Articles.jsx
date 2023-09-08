@@ -1,8 +1,9 @@
 import Header from "../Header.jsx";
 import ArticlesList from "./ArticlesList.jsx";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useParams, useSearchParams} from "react-router-dom";
 import SortOrderBar from "./SortOrderBar.jsx";
+import {getTopics} from "../../../api.js";
 
 export default function Articles() {
 
@@ -11,15 +12,18 @@ export default function Articles() {
     // Page Content States
     const {topic} = useParams()
 
+
     // Page Loading States
     const [isError, setIsError] = useState(false)
+
+    const [topics, setTopics] = useState([])
 
     // Sort and Ordering States
     const [sortBy, setSortBy] = useState(searchParams.get("sort_by"))
     const [orderBy, setOrderBy] = useState(searchParams.get("order"))
 
     useEffect(() => {
-        // do nothing for now
+        getTopics().then(topics => setTopics(topics))
     }, []);
 
     if (isError) return <section className={"container"}>
@@ -31,7 +35,7 @@ export default function Articles() {
         <section className={"container"}>
             <Header content={topic ? `${topic[0].toUpperCase() + topic.slice(1)} Articles` : "Articles"}/>
             <br/>
-            <SortOrderBar setOrderBy={setOrderBy} setSortBy={setSortBy}/>
+            <SortOrderBar setOrderBy={setOrderBy} setSortBy={setSortBy} topic={topic} topics={topics}/>
             <ArticlesList topic={topic} order={orderBy} setIsError={setIsError} sort={sortBy} searchParams={searchParams} setSearchParams={setSearchParams}/>
         </section>
     </>

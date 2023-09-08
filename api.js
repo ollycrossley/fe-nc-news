@@ -36,3 +36,7 @@ export const postComment = (article_id, username, body) => {
     return axios.post(`${baseURL}/api/articles/${article_id}/comments`, {username, body}).then(response => response.data.comment)
 }
 
+export const getTopics = () => {
+    return axios.get(`${baseURL}/api/topics/`).then(response => response.data.topics)
+}
+

@@ -11,7 +11,6 @@ export default function ArticlesList({topic, order, sort, setIsError, searchPara
 
     function handleSearchParams(){
         const params = Object.fromEntries([...searchParams]);
-
         order ? setSearchParams({...params, order: order}) : ""
         sort ? setSearchParams({...params, sort: sort}) : ""
     }
@@ -22,10 +21,10 @@ export default function ArticlesList({topic, order, sort, setIsError, searchPara
             setArticles(articles)
             handleSearchParams()
             setIsLoading(false)
-        }).catch(err => {
+        }).catch(() => {
             setIsError(true)
         })
-    }, [order, sort]);
+    }, [order, sort, topic]);
 
     if (isLoading) return <Container alignContent={"center"}>
         <img className={"image m-auto is-64x64"} src={"https://i.ibb.co/6bCLSjz/loading.gif"} alt={"loading symbol"}/>
