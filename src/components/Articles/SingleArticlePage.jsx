@@ -10,7 +10,6 @@ export default function SingleArticlePage() {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [votes, setVotes] = useState(article.votes)
-    // const [err, setErr] = useState(null)
 
     useEffect(() => {
         setIsLoading(true)

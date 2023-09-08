@@ -21,6 +21,19 @@ export default function Comments({article, comments, setComments}) {
         setCommentInput("")
     }
 
+    function remove(array, key, value) {
+        const index = array.findIndex(obj => obj[key] === value);
+        return index >= 0 ? [
+            ...array.slice(0, index),
+            ...array.slice(index + 1)
+        ] : array;
+    }
+
+    function deleteComment (comment_id) {
+        setComments(remove(comments, "comment_id", comment_id))
+        alert("This comment has been removed!")
+    }
+
     if (comments.length === 0) {
         return <section>
             <h1 className={"title is-size-3 mb-6"}>Comments ({article.comment_count})</h1>
@@ -53,7 +66,7 @@ export default function Comments({article, comments, setComments}) {
             </form>
         <br/>
 
-        {comments.map(comment => <SingleComment comment={comment} key={comment.comment_id}/>)}
+        {comments.map(comment => <SingleComment comment={comment} key={comment.comment_id} deleteComment={deleteComment}/>)}
 
         <br/><br/>
     </section>
