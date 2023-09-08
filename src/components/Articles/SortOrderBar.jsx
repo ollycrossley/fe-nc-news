@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 
 
-export default function SortOrderBar({setOrderBy}) {
+export default function SortOrderBar({setOrderBy, setSortBy}) {
     // Set Ref
     const ref = useRef(null)
 
@@ -10,14 +10,27 @@ export default function SortOrderBar({setOrderBy}) {
     const [isSortDrActive, setIsSortDrActive] = useState(false)
 
     // Accepted Sorts
-    const acceptedOrders = {Author: "author", Title: "title", ID: "article_id", Topic: "topic", "Created At": "created_at", Popularity: "votes", Comments: "comment_count"}
+    const acceptedSorts = {
+        Author: "author",
+        Title: "title",
+        ID: "article_id",
+        Topic: "topic",
+        "Created At": "created_at",
+        Popularity: "votes",
+        Comments: "comment_count"
+    }
 
     function handleOrder(order) {
-        if (order === "asc"){
+        if (order === "asc") {
             setOrderBy("asc")
         } else if (order === "desc") {
             setOrderBy("desc")
         }
+    }
+
+    function handleSort(sort) {
+        console.log(acceptedSorts[sort])
+        setSortBy(acceptedSorts[sort])
     }
 
     useEffect(() => {
@@ -49,7 +62,7 @@ export default function SortOrderBar({setOrderBy}) {
             </div>
             <div className="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div className="dropdown-content">
-                    {Object.keys(acceptedOrders).map(order => <a className="dropdown-item">{order}</a>)}
+                    {Object.keys(acceptedSorts).map(sort => <a className="dropdown-item" key={sort} onMouseDown={() => handleSort(sort)}>{sort}</a>)}
                 </div>
             </div>
         </div>
