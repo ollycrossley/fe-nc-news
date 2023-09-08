@@ -6,12 +6,10 @@ import SortOrderBar from "./SortOrderBar.jsx";
 import {getTopics} from "../../../api.js";
 
 export default function Articles() {
-
     let [searchParams, setSearchParams] = useSearchParams()
 
     // Page Content States
     const {topic} = useParams()
-
 
     // Page Loading States
     const [isError, setIsError] = useState(false)
@@ -19,8 +17,8 @@ export default function Articles() {
     const [topics, setTopics] = useState([])
 
     // Sort and Ordering States
-    const [sortBy, setSortBy] = useState(searchParams.get("sort_by"))
-    const [orderBy, setOrderBy] = useState(searchParams.get("order"))
+    const [sortBy, setSortBy] = useState(searchParams.get("sort_by") || "created_at")
+    const [orderBy, setOrderBy] = useState(searchParams.get("order") || "desc")
 
     useEffect(() => {
         getTopics().then(topics => setTopics(topics))

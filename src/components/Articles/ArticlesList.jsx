@@ -10,9 +10,11 @@ export default function ArticlesList({topic, order, sort, setIsError, searchPara
     const [isLoading, setIsLoading] = useState(false)
 
     function handleSearchParams(){
-        const params = Object.fromEntries([...searchParams]);
-        order ? setSearchParams({...params, order: order}) : ""
-        sort ? setSearchParams({...params, sort: sort}) : ""
+        // let params = Object.fromEntries([...searchParams]);
+        setSearchParams({order: order, sort_by: sort})
+        // sort ? setSearchParams({...params, sort_by: sort}) : ""
+        // params = Object.fromEntries([...searchParams]);
+        // order ? setSearchParams({...params, order: order}) : ""
     }
 
     useEffect(() => {
