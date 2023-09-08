@@ -21,7 +21,7 @@ export default function Articles() {
     const [orderBy, setOrderBy] = useState(searchParams.get("order") || "desc")
 
     useEffect(() => {
-        getTopics().then(topics => setTopics(topics))
+        getTopics().then(topics => setTopics(topics)).catch(() => setIsError(true))
     }, []);
 
     if (isError) return <section className={"container"}>

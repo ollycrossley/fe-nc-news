@@ -9,6 +9,7 @@ import Users from "./components/Users/Users.jsx";
 import Home from "./components/Home.jsx";
 import {Route, Routes} from "react-router-dom";
 import SingleArticlePage from "./components/Articles/SingleArticlePage.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <>
             <NavBar/>
             <Routes>
+                <Route path="*" element={<ErrorPage />}/>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/articles" element={<Articles/>}/>
                 <Route path="/articles/:article_id" element={<SingleArticlePage/>}/>

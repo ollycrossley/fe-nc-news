@@ -41,6 +41,8 @@ export default function Comments({article}) {
     useEffect(() => {
         getComments(article.article_id).then(comments => {
             setComments(comments)
+        }).catch(() => {
+            return <p>OOPS!</p>
         })
     }, []);
 
