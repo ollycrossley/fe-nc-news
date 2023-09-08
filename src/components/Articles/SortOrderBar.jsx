@@ -38,14 +38,14 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
 
     useEffect(() => {
         const checkIfClickedOutside = e => {
+            if (isCatDrActive && ref.current && !ref.current.contains(e.target)) {
+                setIsCatDrActive(false)
+            }
             if (isSortDrActive && ref.current && !ref.current.contains(e.target)) {
                 setIsSortDrActive(false)
             }
             if (isOrderDrActive && ref.current && !ref.current.contains(e.target)) {
                 setIsOrderDrActive(false)
-            }
-            if (isCatDrActive && ref.current && !ref.current.contains(e.target)) {
-                setIsCatDrActive(false)
             }
         }
         document.addEventListener("mousedown", checkIfClickedOutside)
