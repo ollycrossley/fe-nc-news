@@ -38,3 +38,6 @@ export const getTopics = () => {
     return axios.get(`${baseURL}/api/topics/`).then(response => response.data.topics)
 }
 
+export const removeComment = (comment_id) => {
+    return axios.delete(`${baseURL}/api/comments/${comment_id}`)
+}

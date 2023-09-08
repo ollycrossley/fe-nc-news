@@ -1,23 +1,20 @@
 import SingleComment from "./SingleComment.jsx";
 import {UserContext} from "../../../contexts/loggedUser.jsx";
-import {useContext, useState} from "react";
-import {postComment} from "../../../../api.js";
+import {useContext, useEffect, useState} from "react";
+import {getComments, postComment, removeComment} from "../../../../api.js";
 
-export default function Comments({article, comments, setComments}) {
-
+export default function Comments({article}) {
     const {user, setUser} = useContext(UserContext)
     const [commentInput, setCommentInput] = useState("")
+    const [comments, setComments] = useState([])
 
     const handleSubmit = (event) => {
         event.preventDefault()
         postComment(article.article_id, user.username, commentInput).then(newComment => {
-            setComments(currComments => {
-                return [newComment, ...currComments]
-            })
-        }).catch((err) => {
+            setComments(currComments => [newComment, ...currComments])
+        }).catch(() => {
             alert("Something went wrong! Please refresh and try again")
         })
-        alert("Comment successfully posted!")
         setCommentInput("")
     }
 
@@ -30,9 +27,22 @@ export default function Comments({article, comments, setComments}) {
     }
 
     function deleteComment (comment_id) {
+        const oldComments = [...comments]
         setComments(remove(comments, "comment_id", comment_id))
-        alert("This comment has been removed!")
+        removeComment(comment_id).then(()=> {
+            alert("This comment has been removed!")
+        }).catch(() => {
+            setComments(oldComments)
+            alert("Something went wrong, please try again later!")
+        })
+
     }
+
+    useEffect(() => {
+        getComments(article.article_id).then(comments => {
+            setComments(comments)
+        })
+    }, []);
 
     if (comments.length === 0) {
         return <section>

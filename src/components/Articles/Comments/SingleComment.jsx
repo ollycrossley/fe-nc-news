@@ -27,7 +27,7 @@ export default function SingleComment({comment, deleteComment}){
                     <span className={"icon has-text-danger"} aria-label={"Likes"}><i className={"fas fa-heart"}/></span>
                 <   span><p>{comment.votes}</p></span>
                 </span>
-                {comment.author === user.username ? <a className={"pl-5"} >Delete</a> : null}
+                {comment.author === user.username ? <a className={"pl-5"} onClick={() => deleteComment(comment.comment_id)}>Delete</a> : null}
             </div>
         </article>
     </section>

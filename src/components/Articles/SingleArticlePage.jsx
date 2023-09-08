@@ -1,13 +1,13 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getArticle, getComments, patchVote} from "../../../api.js";
+import {getArticle, patchVote} from "../../../api.js";
 import moment from "moment";
 import Comments from "./Comments/Comments.jsx";
 
 export default function SingleArticlePage() {
     const {article_id} = useParams()
     const [article, setArticle] = useState({})
-    const [comments, setComments] = useState([])
+
     const [isLoading, setIsLoading] = useState(false)
     const [votes, setVotes] = useState(article.votes)
 
@@ -16,17 +16,13 @@ export default function SingleArticlePage() {
         getArticle(article_id).then(article => {
             setArticle(article)
             setVotes(article.votes)
-
-        })
-        getComments(article_id).then(comments => {
-            setComments(comments)
             setIsLoading(false)
         })
     }, []);
 
     const handleVotes = (vote) => {
         setVotes(currVotes => currVotes + vote)
-        patchVote(article_id, vote).catch((err) => {
+        patchVote(article_id, vote).catch(() => {
             setVotes(currVotes => currVotes - vote)
             alert("Something went wrong! Try again!")
         })
@@ -85,8 +81,9 @@ export default function SingleArticlePage() {
                 </section>
 
                 <p className={"block mb-6"} style={{width: "70%"}}>{article.body}</p>
+                <Comments article={article}/>
 
-                <Comments article={article} comments={comments} setComments={setComments}/></div>
+            </div>
         </div>
     </div>
 }
