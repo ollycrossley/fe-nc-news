@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
-export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
+export default function SortOrderBar({sortBy, orderBy, setOrderBy, setSortBy, topic, topics}) {
     // Set Ref
     const ref = useRef(null)
 
@@ -22,6 +22,11 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
         "Created At": "created_at",
         Popularity: "votes",
         Comments: "comment_count"
+    }
+
+    const acceptedOrders = {
+        Ascending: "asc",
+        Descending: "desc"
     }
 
     function handleOrder(order) {
@@ -61,7 +66,7 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu3"
                         onClick={() => setIsCatDrActive(!isCatDrActive)}>
-                    <p>{topic ? topic[0].toUpperCase() + topic.slice(1) : "All"}</p>
+                    <p><strong>{topic ? topic[0].toUpperCase() + topic.slice(1) : "All"}</strong></p>
                     <span className="icon is-small has-text-danger">
                                 <i className="fas fa-angle-down" aria-hidden="true"></i>
                             </span>
@@ -69,9 +74,9 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             </div>
             <div className="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div className="dropdown-content">
-                    <a className={"dropdown-item"} key={"all"} onMouseDown={() => navigate("/articles")}>All</a>
-                    {topics.map(topic => <a className="dropdown-item" key={topic.slug}
-                                            onMouseDown={() => navigate(`/articles/topics/${topic.slug}`)}>{topic.slug[0].toUpperCase() + topic.slug.slice(1)}</a>)}
+                    <a className={`dropdown-item ${!topic ? "has-background-danger-light" : "" }`} key={"all"} onMouseDown={() => navigate("/articles")}>All</a>
+                    {topics.map(thisTopic => <a className={`dropdown-item ${thisTopic.slug === topic ? "has-background-danger-light" : "" }`} key={thisTopic.slug}
+                                            onMouseDown={() => navigate(`/articles/topics/${thisTopic.slug}`)}>{thisTopic.slug[0].toUpperCase() + thisTopic.slug.slice(1)}</a>)}
                 </div>
             </div>
         </div>
@@ -80,7 +85,7 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu3"
                         onClick={() => setIsSortDrActive(!isSortDrActive)}>
-                    <p>Sort by</p>
+                    <p><strong>Sort by</strong> ({Object.keys(acceptedSorts).find(key => acceptedSorts[key] === sortBy)})</p>
                     <span className="icon is-small has-text-danger">
                                 <i className="fas fa-angle-down" aria-hidden="true"></i>
                             </span>
@@ -88,7 +93,7 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             </div>
             <div className="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div className="dropdown-content">
-                    {Object.keys(acceptedSorts).map(sort => <a className="dropdown-item" key={sort}
+                    {Object.keys(acceptedSorts).map(sort => <a className={`dropdown-item ${acceptedSorts[sort] === sortBy ? "has-background-danger-light" : ""}`} key={sort}
                                                                onMouseDown={() => handleSort(sort)}>{sort}</a>)}
                 </div>
             </div>
@@ -98,7 +103,7 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu3"
                         onClick={() => setIsOrderDrActive(!isOrderDrActive)}>
-                    <p>Order</p>
+                    <p><strong>Order</strong> ({Object.keys(acceptedOrders).find(key => acceptedOrders[key] === orderBy)})</p>
                     <span className="icon is-small has-text-danger">
                                 <i className="fas fa-angle-down" aria-hidden="true"></i>
                             </span>
@@ -106,8 +111,8 @@ export default function SortOrderBar({setOrderBy, setSortBy, topic, topics}) {
             </div>
             <div className="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div className="dropdown-content">
-                    <a className="dropdown-item" onMouseDown={() => handleOrder("asc")}>Ascending</a>
-                    <a className="dropdown-item" onMouseDown={() => handleOrder("desc")}>Descending</a>
+                    <a className={`dropdown-item ${orderBy === "asc" ? "has-background-danger-light" : ""}`} onMouseDown={() => handleOrder("asc")}>Ascending</a>
+                    <a className={`dropdown-item ${orderBy === "desc" ? "has-background-danger-light" : ""}`} onMouseDown={() => handleOrder("desc")}>Descending</a>
                 </div>
             </div>
         </div>

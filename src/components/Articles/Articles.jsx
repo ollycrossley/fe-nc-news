@@ -33,7 +33,7 @@ export default function Articles() {
         <section className={"container"}>
             <Header content={topic ? `${topic[0].toUpperCase() + topic.slice(1)} Articles` : "Articles"}/>
             <br/>
-            <SortOrderBar setOrderBy={setOrderBy} setSortBy={setSortBy} topic={topic} topics={topics}/>
+            <SortOrderBar sortBy={sortBy} orderBy={orderBy} setOrderBy={setOrderBy} setSortBy={setSortBy} topic={topic} topics={topics}/>
             <ArticlesList topic={topic} order={orderBy} setIsError={setIsError} sort={sortBy} searchParams={searchParams} setSearchParams={setSearchParams}/>
         </section>
     </>
