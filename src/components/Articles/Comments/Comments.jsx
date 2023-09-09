@@ -46,13 +46,13 @@ export default function Comments({article}) {
         })
     }, []);
 
-    if (comments.length === 0) {
-        return <section>
-            <h1 className={"title is-size-3 mb-6"}>Comments ({article.comment_count})</h1>
-            <p>There are no comments!</p>
-            <br/><br/>
-        </section>
-    }
+    // if (comments.length === 0) {
+    //     return <section>
+    //         <h1 className={"title is-size-3 mb-6"}>Comments ({article.comment_count})</h1>
+    //         <p>There are no comments!</p>
+    //         <br/><br/>
+    //     </section>
+    // }
 
     return <section>
         <h1 className={"title is-size-3 mb-6"}>Comments ({article.comment_count})</h1>
@@ -78,7 +78,7 @@ export default function Comments({article}) {
             </form>
         <br/>
 
-        {comments.map(comment => <SingleComment comment={comment} key={comment.comment_id} deleteComment={deleteComment}/>)}
+        {comments.length !== 0 ? comments.map(comment => <SingleComment comment={comment} key={comment.comment_id} deleteComment={deleteComment}/>) : <p>There are no comments!</p>}
 
         <br/><br/>
     </section>
